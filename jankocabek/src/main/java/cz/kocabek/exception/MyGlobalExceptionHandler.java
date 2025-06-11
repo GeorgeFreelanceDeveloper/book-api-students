@@ -9,10 +9,15 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 
 public class MyGlobalExceptionHandler {
-    @ResponseStatus(org.springframework.http.HttpStatus.NOT_FOUND)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(BookNotFoundException.class)
     public ErrorResponse handleBookNotFoundException(BookNotFoundException ex) {
         return ErrorResponse.create(ex, HttpStatus.NOT_FOUND, ex.getMessage());
     }
 
+    @ResponseStatus(HttpStatus.CONFLICT)
+    @ExceptionHandler(DuplicatedRecordException.class)
+    public ErrorResponse handleDuplicatedRecordException(DuplicatedRecordException ex) {
+        return ErrorResponse.create(ex, HttpStatus.CONFLICT, ex.getMessage());
+    }
 }
