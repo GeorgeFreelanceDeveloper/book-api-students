@@ -26,7 +26,7 @@ public class BookService {
     public BookDTO getBook(Long id) {
         final String BASE_URI = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
         final var book = memoryBookRepository.findBookById(id);
-        return new BookDTO(book, id, BASE_URI);
+        return new BookDTO(book,  BASE_URI);
 
     }
 
