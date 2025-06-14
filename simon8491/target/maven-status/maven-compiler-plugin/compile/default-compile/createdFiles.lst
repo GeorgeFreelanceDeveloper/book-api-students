@@ -1,6 +1,0 @@
-pl/coderslab/model/Book.class
-pl/coderslab/AppConfig.class
-pl/coderslab/controller/BookController.class
-pl/coderslab/controller/MockBookService.class
-pl/coderslab/Application.class
-pl/coderslab/AppInitializer.class
