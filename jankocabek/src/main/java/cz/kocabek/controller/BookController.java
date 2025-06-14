@@ -28,13 +28,13 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable("id") Long id) {
-        Book book = bookService.getBook(id).orElseThrow(() -> new BookNotFoundException("Book with id " + id + " not found"));
+        Book book = bookService.getBook(id).orElseThrow(() -> new BookNotFoundException("Book with ID " + id + " wasn't found"));
         return ResponseEntity.ok(book);
     }
 
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book adedBook= bookService.addBook(book);
+        Book adedBook = bookService.addBook(book);
         return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(adedBook.getId()).toUri()).body(adedBook);
     }
 
@@ -49,7 +49,7 @@ public class BookController {
         if (bookService.deleteBook(id)) {
             return ResponseEntity.noContent().build();
         }
-        throw new BookNotFoundException("Book with id: " + id + " not found and can't be deleted");
+        throw new BookNotFoundException("Book with ID " + id + " not found and can't be deleted");
     }
 
 }
