@@ -40,8 +40,8 @@ public class BookController {
 
     @PutMapping(value = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<Book> updateBook(@RequestBody Book book) {
-        Book updateBook = bookService.updateBook(book).orElseThrow(() -> new BookNotFoundException("book with id: " + book.getId() + " not found and can't be updated"));
-        return ResponseEntity.ok(updateBook);
+        return ResponseEntity.ok(bookService.updateBook(book));
+
     }
 
     @DeleteMapping("/{id}")
