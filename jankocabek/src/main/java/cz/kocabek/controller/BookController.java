@@ -25,8 +25,8 @@ public class BookController {
 
     @JsonView(View.Book.class)
     @GetMapping("")
-    public BooksDTO getBooks() {
-        return bookService.getBooks().withStatus(HttpStatus.OK);
+    public ResponseEntity<BooksDTO> getBooks() {
+        return ResponseEntity.ok( bookService.getBooks().withStatus(HttpStatus.OK));
     }
 
     @JsonView(View.BookWithStatus.class)
