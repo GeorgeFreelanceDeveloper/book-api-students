@@ -36,13 +36,13 @@ public class BookController {
     }
 
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        Book adedBook = bookService.addBook(book);
-        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(adedBook.getId()).toUri()).body(adedBook);
+    public ResponseEntity<BookDTO> addBook(@RequestBody Book book) {
+        BookDTO addedBook = bookService.addBook(book).withStatus(HttpStatus.CREATED);
+        return ResponseEntity.created(ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(addedBook.getBook().getId()).toUri()).body(addedBook);
     }
 
     @PutMapping(value = "", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Book> updateBook(@RequestBody Book book) {
+    public ResponseEntity<BookDTO> updateBook(@RequestBody Book book) {
         return ResponseEntity.ok(bookService.updateBook(book));
 
     }
@@ -51,7 +51,5 @@ public class BookController {
     public ResponseEntity<?> deleteBook(@PathVariable("id") Long id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
-
     }
-
 }
