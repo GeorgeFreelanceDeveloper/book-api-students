@@ -36,8 +36,10 @@ public class MemoryBookRepository {
         return List.copyOf(books.values());
     }
 
-    public Optional<Book> findBookById(Long id) {
-        return Optional.ofNullable(books.get(id));
+    public Book findBookById(Long id) {
+        if (!books.containsKey(id))
+            throw new BookNotFoundException("Book with id: " + id + " not found");
+        return books.get(id);
     }
 
     public Book addBook(Book book) {
@@ -59,12 +61,10 @@ public class MemoryBookRepository {
         return book;
     }
 
-    public Boolean deleteBook(Long id) {
-        if (books.containsKey(id)) {
-            books.remove(id);
-            return true;
-        }
-        return false;
+    public void deleteBook(Long id) {
+        if (!books.containsKey(id))
+            throw new BookNotFoundException("Book with ID " + id + " not found and can't be deleted");
+        books.remove(id);
     }
 
     private boolean checkISBN(String isbn) {
