@@ -29,9 +29,10 @@ public class MemoryBookService implements BookService {
         return books;
     }
     @Override
-    public void addBook(Book book) {
+    public Book addBook(Book book) {
         book.setId(nextId++);
         books.add(book);
+        return book;
     }
     @Override
     public Optional<Book> getBook(Long id) {
@@ -41,17 +42,20 @@ public class MemoryBookService implements BookService {
                 .findFirst();
     }
     @Override
-    public void updateBook(Book book) {
+    public Optional<Book> updateBook(Book book) {
         // call getBook method defined above
         if (this.getBook(book.getId()).isPresent()) {
             // if such a book is present,
             int indexInList = books.indexOf(this.getBook(book.getId()).get());
             // update object under index
             books.set(indexInList, book);
+            return Optional.of(book);
+        } else {
+            return Optional.empty();
         }
     }
     @Override
-    public void deleteBook(Long id) {
-        books.removeIf(book -> book.getId().equals(id));
+    public boolean deleteBook(Long id) {
+        return books.removeIf(book -> book.getId().equals(id));
     }
 }

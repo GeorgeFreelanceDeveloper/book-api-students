@@ -51,12 +51,12 @@ PUT http://localhost:8080/books
 Content-Type: application/json
 
 {
-  "id": {{book_id}},
-  "isbn": "32222",
-  "title": "Thinking in C#",
-  "publisher": "IT Books",
-  "type": "programming",
-  "author": "Bruce Eckel"
+  "id": 1,
+  "isbn": "978-0-14-028333-7",
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "publisher": "Scribner",
+  "type": "Fiction"
 }
 
 > {%

@@ -9,11 +9,11 @@ public interface BookService {
 
     List<Book> getAllBooks();
 
-    void addBook(Book book);
+    Book addBook(Book book);
 
     Optional<Book> getBook(Long id);
 
-    void updateBook(Book book);
+    Optional<Book> updateBook(Book book);
 
-    void deleteBook(Long id);
+    boolean deleteBook(Long id);
 }
