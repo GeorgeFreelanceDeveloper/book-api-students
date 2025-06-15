@@ -1,0 +1,33 @@
+# IntelliJ IDEA
+/.idea/
+/*.iml
+/out/
+/*.iws
+
+# Maven build output
+/target/
+
+# Logs
+*.log
+
+# Compiled class files
+*.class
+
+# Package files
+*.jar
+*.war
+*.ear
+*.nar
+*.zip
+*.tar.gz
+*.rar
+
+# Maven Wrapper binaries
+.mvn/wrapper/maven-wrapper.jar
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Others
+*.tmp
