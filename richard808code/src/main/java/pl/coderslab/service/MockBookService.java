@@ -14,9 +14,9 @@ public class MockBookService implements BookService {
 
     public MockBookService() {
         list = new ArrayList<>();
-        list.add(new Book(1L, "Norwegian Wood", "Haruki Murakami", "Vintage", "fiction"));
-        list.add(new Book(2L, "The Trial", "Franz Kafka", "Schocken Books", "classic"));
-        list.add(new Book(3L, "The Unbearable Lightness of Being", "Milan Kundera", "Harper Perennial", "philosophical fiction"));
+        list.add(new Book(1L, "9780099448822", "Norwegian Wood", "Haruki Murakami", "Vintage", "fiction"));
+        list.add(new Book(2L, "9780805209990", "The Trial", "Franz Kafka", "Schocken Books", "classic"));
+        list.add(new Book(3L, "9780061148521", "The Unbearable Lightness of Being", "Milan Kundera", "Harper Perennial", "philosophical fiction"));
     }
 
     public List <Book> getAllBooks(){

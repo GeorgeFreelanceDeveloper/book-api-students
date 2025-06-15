@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Book {
     private long id;
+    private String isbn;
     private String title;
     private String author;
     private String publisher;
@@ -11,8 +12,9 @@ public class Book {
 
     public Book() {}
 
-    public Book(long id, String title, String author, String publisher, String type) {
+    public Book(long id, String isbn, String title, String author, String publisher, String type) {
         this.id = id;
+        this.isbn = isbn;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
@@ -59,10 +61,19 @@ public class Book {
         this.type = type;
     }
 
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
     @Override
     public String toString() {
         return "Book{" +
                 "id=" + id +
+                ", isbn='" + isbn + '\'' +
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", publisher='" + publisher + '\'' +
@@ -74,11 +85,11 @@ public class Book {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(publisher, book.publisher) && Objects.equals(type, book.type);
+        return id == book.id && Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(publisher, book.publisher) && Objects.equals(type, book.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, author, publisher, type);
+        return Objects.hash(id, isbn, title, author, publisher, type);
     }
 }
