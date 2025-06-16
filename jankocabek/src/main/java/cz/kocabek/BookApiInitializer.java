@@ -2,7 +2,7 @@ package cz.kocabek;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-public class bookApiInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+public class BookApiInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
