@@ -13,8 +13,6 @@ import java.util.Optional;
 public class MemoryBookService implements BookService {
     @Setter
     private List<Book> books;
-    @Getter
-    @Setter
     private static Long nextId = 4L;
 
     // constructor for creating a Book list
@@ -43,12 +41,16 @@ public class MemoryBookService implements BookService {
     }
     @Override
     public Optional<Book> updateBook(Book book) {
+        final var updatedBookOpt = getBook(book.getId());
         // call getBook method defined above
-        if (this.getBook(book.getId()).isPresent()) {
+        if (updatedBookOpt.isPresent()) {
             // if such a book is present,
-            int indexInList = books.indexOf(this.getBook(book.getId()).get());
-            // update object under index
-            books.set(indexInList, book);
+            final var updatedBook = updatedBookOpt.get();
+            updatedBook.setIsbn(book.getIsbn());
+            updatedBook.setTitle(book.getTitle());
+            updatedBook.setAuthor(book.getAuthor());
+            updatedBook.setPublisher(book.getPublisher());
+            updatedBook.setType(book.getType());
             return Optional.of(book);
         } else {
             return Optional.empty();

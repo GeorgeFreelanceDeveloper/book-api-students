@@ -21,27 +21,27 @@ public class BookController {
         this.bookService = bookService;
     }
 
-@GetMapping
+    @GetMapping
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
-    @PostMapping("")
+    @PostMapping
     public Book addBook(@RequestBody Book book) {
         return bookService.addBook(book);
     }
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Book getBook(@PathVariable Long id) {
-        return this.bookService.getBook(id).orElseThrow(() ->
+        return bookService.getBook(id).orElseThrow(() ->
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Book with id: " + id + " not found"));
     }
-    @PutMapping("")
+    @PutMapping
     public ResponseEntity<Book> updateBook(@RequestBody Book book) {
-        var updatedBook = bookService.updateBook(book);
+        final var updatedBook = bookService.updateBook(book);
         return updatedBook.map(ResponseEntity::ok).orElseGet(()-> ResponseEntity.notFound().build());
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
-        var deleted = bookService.deleteBook(id);
+        final var deleted = bookService.deleteBook(id);
         return deleted ? ResponseEntity.noContent().build():ResponseEntity.notFound().build();
     }
 }
