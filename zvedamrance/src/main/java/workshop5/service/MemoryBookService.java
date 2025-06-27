@@ -1,6 +1,7 @@
 package workshop5.service;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import workshop5.model.Book;
 
@@ -37,7 +38,7 @@ public class MemoryBookService {
                 .findFirst();
     }
 
-    public boolean updateBook(Long id, Book updatedBook) {
+    public ResponseEntity<Book> updateBook(Long id, Book updatedBook) {
         Optional<Book> existing = getBookById(id);
         if (existing.isPresent()) {
             Book book = existing.get();
@@ -46,18 +47,15 @@ public class MemoryBookService {
             book.setIsbn(updatedBook.getIsbn());
             book.setPublisher(updatedBook.getPublisher());
             book.setType(updatedBook.getType());
-            return true;
+            return ResponseEntity.ok().body(book);
         }
-        return false;
+        return ResponseEntity.notFound().build();
     }
 
-    public boolean addBook(Book book) {
-        Optional<Book> existing = getBookById(book.getId());
-        if (existing.isPresent()) {
-            return false;
-        }
+    public Book addBook(Book book) {
+        book.setId((long) books.size());
         books.add(book);
-        return true;
+        return book;
     }
 
     public boolean deleteBook(Long id) {

@@ -1,5 +1,6 @@
 package workshop5.controller;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import workshop5.model.Book;
 import workshop5.service.MemoryBookService;
@@ -17,13 +18,13 @@ public class BookController {
         this.bookService = bookService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<Book> getBooks() {
         return bookService.getAllBooks();
     }
 
-    @PostMapping("")
-    public boolean addBook(@RequestBody Book book) {
+    @PostMapping
+    public Book addBook(@RequestBody Book book) {
         return bookService.addBook(book);
     }
 
@@ -44,7 +45,7 @@ public class BookController {
     }
 
     @PutMapping("/{id}")
-    public boolean updateBookById(@PathVariable Long id, @RequestBody Book book) {
+    public ResponseEntity<Book> updateBookById(@PathVariable Long id, @RequestBody Book book) {
         return bookService.updateBook(id, book);
     }
 }
