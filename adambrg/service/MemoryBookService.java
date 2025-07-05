@@ -1,6 +1,7 @@
-package pl.coderslab.bookapiworkshop;
+package pl.coderslab.bookapiworkshop.service;
 
 import org.springframework.stereotype.Service;
+import pl.coderslab.bookapiworkshop.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;

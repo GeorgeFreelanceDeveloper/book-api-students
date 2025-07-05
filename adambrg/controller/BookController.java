@@ -1,9 +1,11 @@
-package pl.coderslab.bookapiworkshop;
+package pl.coderslab.bookapiworkshop.controller;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.bookapiworkshop.model.Book;
+import pl.coderslab.bookapiworkshop.service.MemoryBookService;
 
 import java.util.List;
 
@@ -55,4 +57,4 @@ public class BookController {
         addBook(new Book(null, "9780544003416", "The Two Towers", "J.R.R. Tolkien", "Houghton Mifflin", "Fantasy"));
         addBook(new Book(null, "9780544003417", "The Return of the King", "J.R.R. Tolkien", "Houghton Mifflin", "Fantasy"));
     }
-}
+} 

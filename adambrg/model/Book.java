@@ -1,4 +1,4 @@
-package pl.coderslab.bookapiworkshop;
+package pl.coderslab.bookapiworkshop.model;
 
 public class Book {
     private Long id;
