@@ -1,10 +1,12 @@
 package pl.coderslab.service;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import pl.coderslab.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MemoryBookService implements BookService {
@@ -19,32 +21,41 @@ public class MemoryBookService implements BookService {
         list.add(new Book(3L, "9780061148521", "The Unbearable Lightness of Being", "Milan Kundera", "Harper Perennial", "philosophical fiction"));
     }
 
-    public List <Book> getAllBooks(){
+    public List<Book> getAllBooks() {
         return list;
     }
 
-    public Book getBook(long id) {
+    public Book getBook(Long id) {
         return list.stream()
-                .filter (book -> book.getId() == id)
+                .filter(book -> id.equals(book.getId()))
                 .findFirst()
                 .orElse(null);
     }
 
-    public void addBook(Book book) {
+    public Book addBook(Book book) {
         book.setId(nextId++);
         list.add(book);
+        return book;
     }
 
-    public void updateBook(Book book) {
-        for (int i =0; i<list.size(); i++){
-            if(list.get(i).getId() == book.getId()){
-                list.set(i,book);
-                break;
-            }
+    public ResponseEntity<Book> updateBook(Long id, Book updatedBook) {
+        Optional<Book> existing = list.stream()
+                .filter(book -> id.equals(book.getId()))
+                .findFirst();
+
+        if (existing.isPresent()) {
+            Book book = existing.get();
+            book.setTitle(updatedBook.getTitle());
+            book.setAuthor(updatedBook.getAuthor());
+            book.setIsbn(updatedBook.getIsbn());
+            book.setPublisher(updatedBook.getPublisher());
+            book.setType(updatedBook.getType());
+            return ResponseEntity.ok(book);
         }
+        return ResponseEntity.notFound().build();
     }
 
-    public void deleteBook(long id) {
-        list.removeIf(book -> book.getId() == id);
+    public void deleteBook(Long id) {
+        list.removeIf(book -> id.equals(book.getId()));
     }
 }

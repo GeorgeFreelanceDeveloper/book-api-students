@@ -3,7 +3,7 @@ package pl.coderslab.model;
 import java.util.Objects;
 
 public class Book {
-    private long id;
+    private Long id;
     private String isbn;
     private String title;
     private String author;
@@ -12,7 +12,7 @@ public class Book {
 
     public Book() {}
 
-    public Book(long id, String isbn, String title, String author, String publisher, String type) {
+    public Book(Long id, String isbn, String title, String author, String publisher, String type) {
         this.id = id;
         this.isbn = isbn;
         this.title = title;
@@ -21,11 +21,11 @@ public class Book {
         this.type = type;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,9 +83,15 @@ public class Book {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Book book = (Book) o;
-        return id == book.id && Objects.equals(isbn, book.isbn) && Objects.equals(title, book.title) && Objects.equals(author, book.author) && Objects.equals(publisher, book.publisher) && Objects.equals(type, book.type);
+        return Objects.equals(id, book.id) &&
+                Objects.equals(isbn, book.isbn) &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(publisher, book.publisher) &&
+                Objects.equals(type, book.type);
     }
 
     @Override
