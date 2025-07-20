@@ -1,19 +1,25 @@
 package pl.coderslab.bookapiworkshop.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import jakarta.persistence.*;
 
-@Setter
+@Entity
+@Table(name = "books")
 @Getter
+@Setter
+@NoArgsConstructor
 public class Book {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String isbn;
     private String title;
     private String author;
     private String publisher;
     private String type;
-
-    public Book() {}
 
     public Book(Long id, String isbn, String title, String author, String publisher, String type) {
         this.id = id;
@@ -23,5 +29,4 @@ public class Book {
         this.publisher = publisher;
         this.type = type;
     }
-
 }
