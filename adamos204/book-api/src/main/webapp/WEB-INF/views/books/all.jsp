@@ -24,6 +24,14 @@
             <td><c:out value="${book.author}" /></td>
             <td><c:out value="${book.publisher}" /></td>
             <td><c:out value="${book.type}" /></td>
+            <td>
+                <form method="get" action="${pageContext.request.contextPath}/admin/books/edit/${book.id}" style="display:inline;">
+                    <button type="submit">Edit</button>
+                </form>
+                <form action="${pageContext.request.contextPath}/admin/books/delete/${book.id}" method="post">
+                    <button type="submit" onclick="return confirm('Do you really want to continue with this operation?');">Delete</button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
     </tbody>
