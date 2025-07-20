@@ -1,9 +1,17 @@
 package workshop5.model;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table (name = "books")
 public class Book {
-    private Long id = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String isbn;
     private String title;
     private String author;
@@ -17,6 +25,10 @@ public class Book {
         this.author = author;
         this.publisher = publisher;
         this.type = type;
+    }
+
+    public Book() {
+
     }
 
     public Long getId() {
