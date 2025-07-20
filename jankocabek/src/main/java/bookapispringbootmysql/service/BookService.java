@@ -1,4 +1,4 @@
-package bookapispringbootmysql.Service;
+package bookapispringbootmysql.service;
 
 
 

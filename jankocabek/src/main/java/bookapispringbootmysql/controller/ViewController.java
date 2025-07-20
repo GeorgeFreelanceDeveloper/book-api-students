@@ -2,7 +2,7 @@ package bookapispringbootmysql.controller;
 
 
 
-import bookapispringbootmysql.Service.BookService;
+import bookapispringbootmysql.service.BookService;
 import bookapispringbootmysql.model.Book;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;

@@ -1,7 +1,7 @@
 package bookapispringbootmysql.api.service;
 
 
-import bookapispringbootmysql.Service.BookService;
+import bookapispringbootmysql.service.BookService;
 import bookapispringbootmysql.exception.BookNotFoundException;
 import bookapispringbootmysql.exception.DuplicatedRecordException;
 import bookapispringbootmysql.model.Book;

@@ -1,7 +1,7 @@
 package bookapispringbootmysql.api.controller;
 
 
-import bookapispringbootmysql.Service.BookService;
+import bookapispringbootmysql.service.BookService;
 import bookapispringbootmysql.api.dto.BookDTO;
 import bookapispringbootmysql.api.dto.BooksDTO;
 import bookapispringbootmysql.api.dto.View;
