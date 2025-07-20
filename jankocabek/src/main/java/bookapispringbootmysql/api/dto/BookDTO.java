@@ -1,17 +1,22 @@
-package cz.kocabek.dto;
+package bookapispringbootmysql.api.dto;
 
+import bookapispringbootmysql.model.Book;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import cz.kocabek.model.Book;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
-
+@JsonPropertyOrder({"status", "book", "self"})
+@Data
 public class BookDTO {
     @JsonView( View.BookWithStatus.class)
     private int status;
+
     @JsonView(View.Book.class)
     private final Book book;
+
     @JsonView(View.Book.class)
     @JsonProperty("self")
     private final String selfUri;
@@ -20,18 +25,6 @@ public class BookDTO {
     public BookDTO(Book book, String uri) {
         this.book = book;
         this.selfUri = uri + "/books/" + book.getId();
-    }
-
-    public Book getBook() {
-        return book;
-    }
-
-    public String getSelfUri() {
-        return selfUri;
-    }
-
-    public int getStatus() {
-        return status;
     }
 
     public void setStatus(HttpStatus status) {
@@ -43,11 +36,4 @@ public class BookDTO {
         return this;
     }
 
-    @Override
-    public String toString() {
-        return "BookDTO{" +
-               "book=" + book +
-               ", selfUri='" + selfUri + '\'' +
-               '}';
-    }
 }

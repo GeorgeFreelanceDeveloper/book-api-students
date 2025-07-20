@@ -1,4 +1,4 @@
-package cz.kocabek.exception;
+package bookapispringbootmysql.exception;
 
 public class DuplicatedRecordException extends RuntimeException {
     public DuplicatedRecordException(String message) {

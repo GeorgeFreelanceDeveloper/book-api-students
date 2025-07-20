@@ -1,41 +1,33 @@
-package cz.kocabek.dto;
+package bookapispringbootmysql.api.dto;
 
+
+
+import bookapispringbootmysql.model.Book;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonView;
-import cz.kocabek.model.Book;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.util.List;
 
+@JsonPropertyOrder({"status", "count", "books"})
+@JsonView(View.Book.class)
+@Data
 public class BooksDTO {
-    @JsonView(View.Book.class)
     @JsonProperty("books")
-    private final List<BookDTO> bookDTOS;
-    @JsonView(View.Book.class)
+    private final List<BookDTO> bookDTOList;
+
     private int status;
-    @JsonView(View.Book.class)
     private final int count;
 
     public BooksDTO(List<Book> books, String uri) {
-        this.bookDTOS = wrapBooksToDTO(books, uri);
+        this.bookDTOList = wrapBooksToDTO(books, uri);
         this.count = books.size();
     }
 
-
     private List<BookDTO> wrapBooksToDTO(List<Book> books, String uri) {
         return books.stream().map(book -> new BookDTO(book, uri)).toList();
-    }
-
-    public List<BookDTO> getBookDTOS() {
-        return bookDTOS;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     public void setStatus(HttpStatus status) {
@@ -47,13 +39,4 @@ public class BooksDTO {
         return this;
     }
 
-
-    @Override
-    public String toString() {
-        return "BooksDTO{" +
-               "status=" + status +
-               ", count=" + count +
-               ", bookDTOS=" + bookDTOS +
-               '}';
-    }
 }
