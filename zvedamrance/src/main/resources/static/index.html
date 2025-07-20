@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <title>Správa knih</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2rem; }
+    input, button { margin: 0.5rem; }
+    table { border-collapse: collapse; margin-top: 1rem; }
+    th, td { border: 1px solid #ccc; padding: 0.5rem; }
+    tr:nth-child(even) { background-color: #f9f9f9; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+<h1>Správa knih</h1>
+
+<form id="bookForm">
+  <input type="hidden" id="bookId" />
+  <input type="text" id="isbn" placeholder="ISBN" required />
+  <input type="text" id="title" placeholder="Název knihy" required />
+  <input type="text" id="author" placeholder="Autor" required />
+  <input type="text" id="publisher" placeholder="Vydavatel" required />
+  <input type="text" id="type" placeholder="Typ" required />
+  <button type="submit" id="submitButton">Přidat knihu</button>
+  <button type="button" id="cancelEditButton" class="hidden">Zrušit úpravu</button>
+</form>
+
+<div>
+  <input type="number" id="searchId" placeholder="Zadej ID knihy" />
+  <button id="searchButton">Zobrazit knihu</button>
+</div>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>ISBN</th>
+    <th>Název</th>
+    <th>Autor</th>
+    <th>Vydavatel</th>
+    <th>Typ</th>
+    <th>Akce</th>
+  </tr>
+  </thead>
+  <tbody id="bookTableBody"></tbody>
+</table>
+
+<script src="books.js"></script>
+</body>
+</html>
