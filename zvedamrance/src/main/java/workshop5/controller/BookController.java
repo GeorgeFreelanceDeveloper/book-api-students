@@ -3,52 +3,60 @@ package workshop5.controller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import workshop5.model.Book;
-import workshop5.service.MemoryBookService;
+import workshop5.service.BookService;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
 public class BookController {
 
-    final MemoryBookService bookService;
+    private final BookService bookService;
 
-    public BookController(MemoryBookService bookService) {
+    public BookController(BookService bookService) {
         this.bookService = bookService;
     }
 
     @GetMapping
-    public List<Book> getBooks() {
-        return bookService.getAllBooks();
-    }
-
-    @PostMapping
-    public Book addBook(@RequestBody Book book) {
-        return bookService.addBook(book);
-    }
-
-    @RequestMapping("/helloBook")
-    public Book helloBook() {
-        return new Book(1L, "9788324631766", "Thinking in Java",
-                "Bruce Eckel", "Helion", "programming");
+    public List<Book> getAllBooks() {
+        return bookService.getBooks();
     }
 
     @GetMapping("/{id}")
-    public Optional<Book> getBookById(@PathVariable Long id) {
-        return bookService.getBookById(id);
+    public ResponseEntity<Book> getBook(@PathVariable Long id) {
+        return bookService.get(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @DeleteMapping("/{id}")
-    public boolean deleteBookById(@PathVariable Long id) {
-        return bookService.deleteBook(id);
+    @PostMapping
+    public ResponseEntity<Void> addBook(@RequestBody Book book) {
+        bookService.add(book);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBookById(@PathVariable Long id, @RequestBody Book book) {
-        return bookService.updateBook(id, book);
+    public ResponseEntity<Void> updateBook(@PathVariable Long id, @RequestBody Book book) {
+        if (!bookService.get(id).isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        book.setId(id);
+        bookService.update(book);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
+        if (!bookService.get(id).isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+        bookService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
+
+
+
 
 
 
