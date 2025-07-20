@@ -1,0 +1,98 @@
+### create book
+POST http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "isbn": "34321",
+  "title": "Thinking in Java",
+  "publisher": "Helion",
+  "type": "programming",
+  "author": "Bruce Eckel"
+}
+
+> {%
+    client.test("Response should be 200 OK", function (){
+        client.assert(response.status === 200, 'Expected status 200')
+    })
+
+    // Parse ID from response JSON and store it in a global variable
+    client.global.set("book_id", response.body.id);
+
+    client.test("Response body should contains book data", function (){
+        client.assert(response.body.isbn === '34321')
+        client.assert(response.body.title === 'Thinking in Java')
+        client.assert(response.body.author === 'Bruce Eckel')
+        client.assert(response.body.publisher === 'Helion')
+        client.assert(response.body.type === 'programming')
+    })
+%}
+
+### Find book by id
+GET http://localhost:8080/books/{{book_id}}
+
+> {%
+    client.test("Response should be 200 OK", function (){
+        client.assert(response.status === 200, 'Expected status 200')
+    })
+
+    client.test("Response body should contains book data", function (){
+        client.assert(response.body.id === client.global.get("book_id"))
+        client.assert(response.body.isbn === '34321')
+        client.assert(response.body.title === 'Thinking in Java')
+        client.assert(response.body.author === 'Bruce Eckel')
+        client.assert(response.body.publisher === 'Helion')
+        client.assert(response.body.type === 'programming')
+    })
+%}
+
+
+### Update book
+PUT http://localhost:8080/books
+Content-Type: application/json
+
+{
+  "id": 1,
+  "isbn": "978-0-14-028333-7",
+  "title": "The Great Gatsby",
+  "author": "F. Scott Fitzgerald",
+  "publisher": "Scribner",
+  "type": "Fiction"
+}
+
+> {%
+    client.test("Response should be 200 OK", function (){
+        client.assert(response.status === 200, 'Expected status 200')
+    })
+
+    client.test("Response body should contains book data", function (){
+        client.assert(response.body.id === client.global.get("book_id"))
+        client.assert(response.body.isbn === '32222')
+        client.assert(response.body.title === 'Thinking in C#')
+        client.assert(response.body.author === 'Bruce Eckel')
+        client.assert(response.body.publisher === 'IT Books')
+        client.assert(response.body.type === 'programming')
+    })
+%}
+
+
+### Find all books
+GET http://localhost:8080/books
+
+> {%
+    client.test("Response should be 200 OK", function (){
+        client.assert(response.status === 200, 'Expected status 200')
+    })
+
+    client.test("Response body should contains list of books", function (){
+        client.assert(response.body.length > 0)
+    })
+%}
+
+### DELETE requested book
+DELETE http://localhost:8080/books/{{book_id}}
+
+> {%
+    client.test("Response should be 204 NO CONTENT", function (){
+        client.assert(response.status === 204, 'Expected status 204 NO CONTENT')
+    })
+%}
